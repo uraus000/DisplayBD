@@ -1,0 +1,6 @@
+D:/Work/wonik/DisplayBD/CMakeFiles/DisplayBD.dir
+D:/Work/wonik/DisplayBD/CMakeFiles/edit_cache.dir
+D:/Work/wonik/DisplayBD/CMakeFiles/rebuild_cache.dir
+D:/Work/wonik/DisplayBD/cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir
+D:/Work/wonik/DisplayBD/cmake/stm32cubemx/CMakeFiles/edit_cache.dir
+D:/Work/wonik/DisplayBD/cmake/stm32cubemx/CMakeFiles/rebuild_cache.dir

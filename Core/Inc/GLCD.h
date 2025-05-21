@@ -9,7 +9,7 @@
 #define INC_GLCD_H_
 
 #include <stdint.h>
-#include "stm32f1xx_hal.h"
+#include "main.h"
 
 #define GLCD_DATA_PORT 		GPIOC
 
@@ -26,9 +26,7 @@ void GLCD_WriteCommand(uint8_t cmd, uint8_t chip);
 void GLCD_WriteData(uint8_t data, uint8_t chip);
 void GLCD_Init(void);
 void GLCD_Clear(void);
-void GLCD_SetPixel(uint8_t x, uint8_t y, uint8_t on);
-void GLCD_DrawPixel(uint8_t x, uint8_t y);
-void GLCD_SetCursor(uint8_t x, uint8_t Line, uint8_t chip);
-void GLCD_PutChar(uint8_t x, uint8_t page, char ch);
+void GLCD_SetCursor(uint8_t x, uint8_t Line);
+
 
 #endif /* INC_GLCD_H_ */

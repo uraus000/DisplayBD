@@ -7,7 +7,6 @@
 
 #include "glcd.h"
 
-
 void GLCD_Enable(void) {
     HAL_GPIO_WritePin(GLCD_CTRL_PORT, GLCD_EN_Pin, GPIO_PIN_SET);
     HAL_Delay(1);
@@ -59,52 +58,10 @@ void GLCD_Init(void) {
 }
 
 void GLCD_Clear(void) {
-    for (uint8_t page = 0; page < 4; page++) {
-        for (uint8_t chip = 1; chip <= 2; chip++) {
-            GLCD_WriteCommand(0xB8 | page, chip);  // Page address
-            GLCD_WriteCommand(0x40, chip);         // Column address = 0
-            for (uint8_t col = 0; col < 50; col++) {
-                GLCD_WriteData(0x00, chip);        // Clear byte
-            }
-        }
-    }
+    GLCD_WriteCommand(0x01, 0); // Display ON
 }
 
-void GLCD_SetPixel(uint8_t x, uint8_t y, uint8_t on) {
-    if (x >= 100 || y >= 32) return;
-
-    uint8_t page = y / 8;
-    uint8_t bit = y % 8;
-
-   // if (on)
-   //     glcd_buffer[x][page] |= (1 << bit);
-   // else
-    //    glcd_buffer[x][page] &= ~(1 << bit);
-
-    uint8_t chip = (x < 50) ? 1 : 2;
-    uint8_t col = x % 50;
-
-    GLCD_WriteCommand(0xB8 | page, chip);
-    GLCD_WriteCommand(0x40 | col, chip);
-  //  GLCD_WriteData(glcd_buffer[x][page], chip);
-}
-
-void GLCD_DrawPixel(uint8_t x, uint8_t y) {
-    uint8_t chip = (x < 50) ? 1 : 2;
-    uint8_t col = x % 50;
-    uint8_t page = y / 8;
-    uint8_t bit = y % 8;
-
-    static uint8_t buffer[100][4] = {0}; // 단순 버퍼
-
-    buffer[x][page] |= (1 << bit);
-
-    GLCD_WriteCommand(0xB8 | page, chip);
-    GLCD_WriteCommand(0x40 | col, chip);
-    GLCD_WriteData(buffer[x][page], chip);
-}
-
-void GLCD_SetCursor(uint8_t x, uint8_t Line, uint8_t chip) {
+void GLCD_SetCursor(uint8_t x, uint8_t Line) {
    uint8_t temp = 0x80;
    temp |= (Line == 0)?0x00:0x40;
    temp |= x;
@@ -113,9 +70,3 @@ void GLCD_SetCursor(uint8_t x, uint8_t Line, uint8_t chip) {
    GLCD_WriteCommand(temp,2);
 }
 
-void GLCD_PutChar(uint8_t x, uint8_t page, char ch) {
-    if (ch < 32 || ch > 127) return;
-
-    // GLCD_SetCursor(col, page, chip);
-
-}

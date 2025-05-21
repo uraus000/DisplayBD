@@ -114,11 +114,11 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-      GLCD_SetCursor(1,0,1);
+    
 	  GLCD_WriteData(0x30+t, 2);
 	  if(t == 9) {t = 0;}
 	  else { t++;}
-
+    
 	  if(LED_Dir)	{	GPIOC->ODR = 0xffff;	}
 	  else			{	GPIOC->ODR = 0x0000;	}
 
@@ -126,7 +126,7 @@ int main(void)
 	  {
 		  if(flag > 4)	{	LED_Dir = 0;
 
-		  //USART1_TX(satr,14);
+		  GLCD_SetCursor(0,0);
 		  }
 		  else			{	flag++;			}
 
